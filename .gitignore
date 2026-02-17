@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Distributions and packaging
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+*.manifest
+wheelhouse/
+*.whl
+
+# Virtual environment
+.env/
+venv/
+env/
+ENV/
+bin/
+lib/
+include/
+share/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-line.txt
+pip.log
+
+services.py
+pricing_2026-02-13.pdf
