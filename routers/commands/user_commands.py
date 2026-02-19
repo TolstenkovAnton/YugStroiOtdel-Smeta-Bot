@@ -46,7 +46,7 @@ async def pricing_handle(message: Message):
             )
         )
     except TelegramNetworkError:
-        await message.answer('Попробуйте запросить прайсинг ещё раз.')
+        await message.answer('Попробуйте запросить прайс-лист ещё раз.')
 
 
 @router.message(F.text == ButtonName.SINGLE_CALC)
