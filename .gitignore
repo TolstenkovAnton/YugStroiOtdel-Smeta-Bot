@@ -1,9 +1,7 @@
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *.so
 
-# Distributions and packaging
 .Python
 build/
 develop-eggs/
@@ -15,7 +13,6 @@ eggs/
 wheelhouse/
 *.whl
 
-# Virtual environment
 .env/
 venv/
 env/
@@ -25,7 +22,6 @@ lib/
 include/
 share/
 
-# Installer logs
 pip-log.txt
 pip-delete-this-line.txt
 pip.log
