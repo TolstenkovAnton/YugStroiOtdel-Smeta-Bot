@@ -12,35 +12,6 @@ from buttons.keyboard_utils import *
 router = Router(name=__name__)
 
 
-@router.message(F.text == ButtonName.COMPUTE)
-@router.message(Command('compute_unit'))
-async def compute_handle(message: Message):
-    text = 'Выберите опцию единичного подсчёта или создания сметы.'
-    await message.answer(
-        text=text,
-        reply_markup=keyboard_for_compute(),
-    )
-
-
-@router.message(F.text == ButtonName.PRICING)
-@router.message(Command('pricing'))
-async def pricing_handle(message: Message):
-    try:
-        await message.bot.send_chat_action(
-            chat_id=message.chat.id,
-            action=ChatAction.UPLOAD_DOCUMENT,
-        )
-        await message.reply_document(
-            document=FSInputFile(
-                path='pricing_2026-02-13.pdf',
-                filename='actual_pricing.pdf',
-                reply_markup=keyboard_by_start(),
-            )
-        )
-    except TelegramNetworkError:
-        await message.answer('Попробуйте запросить прайс-лист ещё раз.')
-
-
 @router.message(F.text == ButtonName.SINGLE_CALC)
 @router.message(Command('single_calculation'))
 async def single_calculation_handle(message: Message, state: FSMContext):

@@ -31,3 +31,42 @@ async def help_handle(message: Message):
         parse_mode='HTML',
         reply_markup=keyboard_by_start(),
     )
+
+
+
+@router.message(F.text == ButtonName.PRICING)
+@router.message(Command('pricing'))
+async def pricing_handle(message: Message):
+    try:
+        await message.bot.send_chat_action(
+            chat_id=message.chat.id,
+            action=ChatAction.UPLOAD_DOCUMENT,
+        )
+        await message.reply_document(
+            document=FSInputFile(
+                path='pricing_2026-02-13.pdf',
+                filename='actual_pricing.pdf',
+                reply_markup=keyboard_by_start(),
+            )
+        )
+    except TelegramNetworkError:
+        await message.answer('Попробуйте запросить прайс-лист ещё раз.')
+
+
+@router.message(F.text == ButtonName.PRICING)
+@router.message(Command('pricing'))
+async def pricing_handle(message: Message):
+    try:
+        await message.bot.send_chat_action(
+            chat_id=message.chat.id,
+            action=ChatAction.UPLOAD_DOCUMENT,
+        )
+        await message.reply_document(
+            document=FSInputFile(
+                path='pricing_2026-02-13.pdf',
+                filename='actual_pricing.pdf',
+                reply_markup=keyboard_by_start(),
+            )
+        )
+    except TelegramNetworkError:
+        await message.answer('Попробуйте запросить прайс-лист ещё раз.')
