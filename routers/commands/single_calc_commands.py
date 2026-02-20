@@ -1,8 +1,6 @@
 from aiogram import F, Router
-from aiogram.enums import ChatAction
-from aiogram.exceptions import TelegramNetworkError
 from aiogram.filters import Command
-from aiogram.types import Message, FSInputFile, BufferedInputFile, ReplyKeyboardRemove
+from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 
 from .states import ComputeStates
