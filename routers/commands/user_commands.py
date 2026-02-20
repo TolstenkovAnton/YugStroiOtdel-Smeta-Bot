@@ -43,6 +43,7 @@ async def pricing_handle(message: Message):
             document=FSInputFile(
                 path='pricing_2026-02-13.pdf',
                 filename='actual_pricing.pdf',
+                reply_markup=keyboard_by_start(),
             )
         )
     except TelegramNetworkError:
@@ -115,9 +116,9 @@ async def service_selected_handle(message: Message, state: FSMContext):
             unit_index=unit_index,
         )
         text = (
-            f"Выбрана услуга: <b>{selected_service['name']}</b>\n\n"
-            f"Цена: <b>{selected_service.get('price', 'Не указана')} руб. за {selected_service['measure']}</b>\n\n"
-            f"Введите количество единиц:"
+            f'Выбрана услуга: <b>{selected_service['name']}</b>\n\n'
+            f'Цена: <b>{selected_service.get('price', 'Не указана')} руб. за {selected_service['measure']}</b>\n\n'
+            f'Введите количество единиц:'
         )
         await message.answer(
             text=text,
@@ -126,7 +127,7 @@ async def service_selected_handle(message: Message, state: FSMContext):
         )
         await state.set_state(ComputeStates.waiting_for_quantity)
     else:
-        await message.answer("Неверный номер услуги. Попробуйте еще раз.")
+        await message.answer('Неверный номер услуги. Попробуйте еще раз.')
 
 
 @router.message(ComputeStates.waiting_for_quantity)
@@ -134,7 +135,7 @@ async def quantity_handle(message: Message, state: FSMContext):
     try:
         quantity = float(message.text.replace(',', '.').replace(' ', ''))
         if quantity <= 0:
-            raise ValueError("Количество должно быть больше 0")
+            raise ValueError('Количество должно быть больше 0')
         data = await state.get_data()
         selected_service = data['selected_service']
         price_per_unit = selected_service.get('price', 0)
@@ -146,7 +147,7 @@ async def quantity_handle(message: Message, state: FSMContext):
         await message.answer(
             text=text,
             parse_mode='HTML',
-            reply_markup=keyboard_by_start()
+            reply_markup=keyboard_by_start(),
         )
         await state.clear()
 
