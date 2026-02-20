@@ -24,7 +24,7 @@ async def start_handle(message: Message):
 @router.message(Command('help'))
 async def help_handle(message: Message):
     text = 'Я помогаю вести подсчёты услуг компании <b>«ЮгСтройОтдел»</b>.'
-    text += ' Перейдите в раздел «К вычислениям» и выберите опцию'
+    text += ' Перейдите в раздел <b>«К вычислениям»</b> и выберите опцию'
     text += ' единичного подсчёта или создания сметы, чтобы приступить.'
     await message.answer(
         text=text,
