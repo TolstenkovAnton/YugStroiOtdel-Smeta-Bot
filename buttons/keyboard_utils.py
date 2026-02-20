@@ -65,3 +65,63 @@ def keyboard_for_service_in_unit(service_index: int):
         keyboard=keyboard,
     )
     return markup
+
+
+def keyboard_for_estimate_start():
+    keyboard = [
+        [KeyboardButton(text=ButtonNameEstimate.ADD_EST)],
+        [KeyboardButton(text=ButtonNameEstimate.FINISH_EST), KeyboardButton(text=ButtonName.BACK_TO_MAIN)]
+    ]
+    markup = ReplyKeyboardMarkup(
+        keyboard=keyboard,
+        resize_keyboard=True,
+        one_time_keyboard=False,
+    )
+    return markup
+
+
+def keyboard_for_unit_choose_estimate():
+    btn_log = KeyboardButton(text=ButtonNameUnit.LOG)
+    btn_des = KeyboardButton(text=ButtonNameUnit.DES)
+    btn_prep = KeyboardButton(text=ButtonNameUnit.PREP)
+    btn_dem_walls = KeyboardButton(text=ButtonNameUnit.DEM_WALLS)
+    btn_dem_floor = KeyboardButton(text=ButtonNameUnit.DEM_FLOOR)
+    btn_dem_roof = KeyboardButton(text=ButtonNameUnit.DEM_ROOF)
+    btn_finish_estimate = KeyboardButton(text=ButtonNameEstimate.FINISH_EST)
+    markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [btn_log, btn_des, btn_prep],
+            [btn_dem_walls, btn_dem_floor, btn_dem_roof],
+            [btn_finish_estimate]
+        ]
+    )
+    return markup
+
+
+def keyboard_for_service_in_unit_estimate(service_index):
+    unit = list(all_services[service_index].values())
+    unit = unit[1:]
+    services_count = len(unit)
+    if services_count <= 3:
+        buttons_per_row = services_count
+    elif services_count <= 6:
+        buttons_per_row = 3
+    elif services_count <= 10:
+        buttons_per_row = 4
+    elif services_count <= 15:
+        buttons_per_row = 5
+    else:
+        buttons_per_row = 5
+    keyboard = []
+    for i in range(1, services_count + 1, buttons_per_row):
+        row = []
+        for j in range(buttons_per_row):
+            if i + j > services_count:
+                break
+            row.append(KeyboardButton(text=str(i + j)))
+        keyboard.append(row)
+    keyboard.append([KeyboardButton(text=ButtonNameEstimate.ADD_EST)])
+    markup = ReplyKeyboardMarkup(
+        keyboard=keyboard,
+    )
+    return markup
