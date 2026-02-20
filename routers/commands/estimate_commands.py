@@ -3,9 +3,8 @@ import time
 
 from aiogram import F, Router
 from aiogram.enums import ChatAction
-from aiogram.exceptions import TelegramNetworkError
 from aiogram.filters import Command
-from aiogram.types import Message, FSInputFile, BufferedInputFile, ReplyKeyboardRemove
+from aiogram.types import Message, BufferedInputFile, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 
 from .states import EstimateStates
@@ -87,7 +86,7 @@ async def estimate_service_selected(message: Message, state: FSMContext):
         await message.answer('Неверный номер. Попробуйте снова.')
 
 
-@router.message(EstimateStates.estimate_adding_service, F.text.isdigit())
+@router.message(EstimateStates.estimate_adding_service)
 async def estimate_quantity_handle(message: Message, state: FSMContext):
     try:
         quantity = float(message.text.replace(',', '.').replace(' ', ''))
