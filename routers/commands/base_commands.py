@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.filters import Command
-from aiogram.types import Message, MessageEntity
+from aiogram.types import Message
 
 from buttons.keyboard_utils import *
 
@@ -11,21 +11,11 @@ router = Router(name=__name__)
 @router.message(F.text == ButtonName.BACK_TO_MAIN)
 @router.message(Command('start'))
 async def start_handle(message: Message):
-    text = f'Привет, {message.from_user.full_name}, вы используете бот «ЮгСтройОтдел» Смета. Начнём работу вместе!'
-    name_bold = MessageEntity(
-        type='bold',
-        offset=len('Привет, '),
-        length=len(message.from_user.full_name),
-    )
-    company_bold = MessageEntity(
-        type='bold',
-        offset=len('Привет, ')+len(message.from_user.full_name)+len(', вы используете бот '),
-        length=14,
-    )
-    entities = [name_bold, company_bold]
+    text = (f'Привет, <b>{message.from_user.full_name}</b>, '
+            f'вы используете бот <b>«ЮгСтройОтдел»</b> Смета. Начнём работу вместе!')
     await message.answer(
         text=text,
-        entities=entities,
+        parse_mode='HTML',
         reply_markup=keyboard_by_start(),
     )
 
@@ -33,13 +23,11 @@ async def start_handle(message: Message):
 @router.message(F.text == ButtonName.HELP)
 @router.message(Command('help'))
 async def help_handle(message: Message):
-    text = 'Я помогаю вести подсчёты услуг компании «ЮгСтройОтдел».'
+    text = 'Я помогаю вести подсчёты услуг компании <b>«ЮгСтройОтдел»</b>.'
     text += ' Перейдите в раздел «К вычислениям» и выберите опцию'
     text += ' единичного подсчёта или создания сметы, чтобы приступить.'
-    company_bold = MessageEntity(
-        type='bold',
-        offset=len('Я помогаю вести подсчёты услуг компании '),
-        length=14,
+    await message.answer(
+        text=text,
+        parse_mode='HTML',
+        reply_markup=keyboard_by_start(),
     )
-    entities = [company_bold]
-    await message.answer(text=text, entities=entities)

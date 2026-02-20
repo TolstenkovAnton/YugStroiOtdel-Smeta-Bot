@@ -5,7 +5,7 @@ from aiogram import F, Router
 from aiogram.enums import ChatAction
 from aiogram.exceptions import TelegramNetworkError
 from aiogram.filters import Command
-from aiogram.types import Message, FSInputFile, BufferedInputFile, MessageEntity, ReplyKeyboardRemove
+from aiogram.types import Message, FSInputFile, BufferedInputFile, ReplyKeyboardRemove
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
@@ -52,21 +52,15 @@ async def pricing_handle(message: Message):
 @router.message(F.text == ButtonName.SINGLE_CALC)
 @router.message(Command('single_calculation'))
 async def single_calculation_handle(message: Message, state: FSMContext):
-    text = f'Выберите нужный раздел:\n'
+    text = f'<b>Выберите нужный раздел:</b>\n'
     for num, unit, in enumerate(all_services, 1):
         if num == 7:
             break
         text += f'{num}. {unit['title']}\n\n'
     text = text.strip()
-    choose_bold = MessageEntity(
-        type='bold',
-        offset=0,
-        length=len('Выберите нужный раздел:'),
-    )
-    entities = [choose_bold]
     await message.answer(
         text=text,
-        entities=entities,
+        parse_mode='HTML',
         reply_markup=keyboard_for_unit_choose(),
     )
     await state.set_state(ComputeStates.choosing_unit)
@@ -97,18 +91,12 @@ async def computing_unit_handle(message: Message, state: FSMContext):
     title = unit[0]
     unit = unit[1:]
     await state.update_data(selected_unit=id_unit - 1, unit_title=title)
-    text = f'Выберите услугу раздела {title} для подсчёта:\n'
-    services_bold = MessageEntity(
-        type='bold',
-        offset=0,
-        length=len(f'Выберите услугу раздела {title} для подсчёта:'),
-    )
-    entities = [services_bold]
+    text = f'<b>Выберите услугу раздела {title} для подсчёта:</b>\n'
     for num, item in enumerate(unit, 1):
         text += f'{num}. {item['name']}\n\n'
     await message.answer(
         text=text,
-        entities=entities,
+        parse_mode='HTML',
         reply_markup=keyboard_for_service_in_unit(id_unit - 1)
     )
     await state.set_state(ComputeStates.waiting_for_service)
