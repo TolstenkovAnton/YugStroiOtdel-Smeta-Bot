@@ -33,7 +33,6 @@ async def help_handle(message: Message):
     )
 
 
-
 @router.message(F.text == ButtonName.PRICING)
 @router.message(Command('pricing'))
 async def pricing_handle(message: Message):
