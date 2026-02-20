@@ -21,3 +21,8 @@ class ButtonNameUnit:
             getattr(cls, attr) for attr in dir(cls)
             if not attr.startswith('_') and not callable(getattr(cls, attr)) and attr.isupper()
         ]
+
+
+class ButtonNameEstimate:
+    ADD_EST = '➕ Добавить услугу'
+    FINISH_EST = '✅ Посчитать смету'
