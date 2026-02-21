@@ -1,10 +1,10 @@
 class ButtonName:
-    HELP = 'О боте'
-    COMPUTE = 'К вычислениям'
-    PRICING = 'Посмотреть прайс-лист'
-    SINGLE_CALC = 'Единичный подсчёт'
-    GEN_EST = 'Создать смету'
-    BACK_TO_MAIN = 'Главное меню'
+    HELP = '❓ О боте'
+    COMPUTE = '📐 К вычислениям'
+    PRICING = '💵 Посмотреть прайс-лист'
+    SINGLE_CALC = '🖊️ Единичный подсчёт'
+    GEN_EST = '🧾 Создать смету'
+    BACK_TO_MAIN = '☰ Главное меню'
 
 
 class ButtonNameUnit:
