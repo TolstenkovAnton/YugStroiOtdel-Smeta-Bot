@@ -69,7 +69,7 @@ async def service_selected_handle(message: Message, state: FSMContext):
         )
         await state.set_state(ComputeStates.waiting_for_quantity)
     else:
-        await message.answer('Неверный номер услуги. Попробуйте еще раз.')
+        await message.answer('Неверный номер услуги. Попробуйте снова.')
 
 
 @router.message(ComputeStates.waiting_for_quantity)
@@ -100,6 +100,6 @@ async def quantity_handle(message: Message, state: FSMContext):
         )
     except Exception:
         await message.answer(
-            'Произошла ошибка при расчете. Попробуйте еще раз.',
+            'Произошла ошибка при расчете. Попробуйте ещё раз.',
         )
         await state.clear()
