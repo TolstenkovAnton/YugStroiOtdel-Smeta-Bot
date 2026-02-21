@@ -18,7 +18,7 @@ router = Router(name=__name__)
 @router.message(Command('generate_estimate'))
 async def generate_estimate_handle(message: Message, state: FSMContext):
     await state.update_data(estimate_items=[])
-    text = 'Режим создания сметы активирован.\n<b>Выберите раздел услуг или завершите</b>.'
+    text = 'Режим создания сметы активирован.\n<b>Вы можете добавить услугу.</b>.'
     await message.answer(
         text=text,
         parse_mode='HTML',
@@ -107,8 +107,9 @@ async def estimate_quantity_handle(message: Message, state: FSMContext):
         items.append(item)
         await state.update_data(estimate_items=items)
         text = (
-            f'Добавлено: <b>{selected_service["name"]}</b> × {quantity} = <b>{total_cost}</b> ₽\n\n'
-            f'Вернитесь к добавлению или завершите.'
+            f'Добавлена услуга <b>{selected_service["name"]}</b> в количестве <b>{quantity}</b> '
+            f'({selected_service['measure']}) = <b>{total_cost}</b> ₽.\n\n'
+            f'Продолжите добавление или посчитайте смету.'
         )
         await message.answer(
             text=text,
