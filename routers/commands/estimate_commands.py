@@ -118,7 +118,7 @@ async def estimate_quantity_handle(message: Message, state: FSMContext):
         text = (
             f'Добавлена услуга <b>{selected_service["name"]}</b> в количестве <b>{quantity}</b> '
             f'({selected_service['measure']}) = <b>{total_cost}</b> ₽.\n\n'
-            f'Продолжите добавление или посчитайте смету.'
+            f'Продолжайте добавление или посчитайте смету.'
         )
         await message.answer(
             text=text,
